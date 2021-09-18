@@ -25,17 +25,17 @@
   </head>
   <body>
     <table id='minhaTabela'>
-      <a href="/"><h2>O'Time</h2></a>
+      <a href='{% url "index"%}'><h2>O'Time</h2></a>
         <thead>
           <tr>
             <th>DISCIPLINAS</th>
-            <th><button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#myBtn4" onclick="salvarDisciplina()"> Nova </button></th>
+            <th><button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#myBtn4"> Nova </button></th>
           </tr>
         </thead>
         <tbody>
-          {% for items, disciplina in disciplinas.items %}
+          {% for disciplina in lista_de_disciplinas %}
             <tr>
-              <td>{{ disciplina.nome }}</td>
+              <td>{{ disciplina.nome }}</td> 
               <td>
                <a href="update/disciplina/{{disciplina.id}}">Detalhes</a>
               </td>
@@ -43,6 +43,7 @@
           {% endfor %}
         </tbody>
       </table>
+
        <div class="modal fade" id="myBtn4" role="dialog">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -51,15 +52,13 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <form method="POST" onsubmit="return false">
+              <form method="POST">
                 {% csrf_token %}
-                <label for="id_nome">Nome:</label><input name="nome" maxlength="25" required="" id="id_nome" type="text">
-                <label for="id_codigo">Codigo:</label><input name="codigo" maxlength="25" required="" id="id_codigo" type="text">
-                <label for="id_carga_horaria_total">Carga horaria total:</label><input name="carga_horaria_total" required="" id="id_carga_horaria_total" type="number">
+                {{ form }}
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Fechar</button>
-              <button class="btn btn-outline-success" onclick="salvarDisciplina()">Salvar</button>
+              <button type="submit" class="btn btn-outline-success" >Salvar</button>
               </form>
             </div>
           </div>
@@ -79,31 +78,6 @@
       <script src='{% static "bootstrap/js/bootstrap.bundle.min.js" %}'></script>
       <!-- javascript JS -->
       <script type="text/javascript">
-      function salvarDisciplina() {
-        requisicao = new XMLHttpRequest();
-        requisicao.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 201) {
-          json = JSON.parse(requisicao.response);
-          id = json["id"];
-          nome_objeto = json["nome"];
-
-          tabela = document.getElementById("minhaTabela");
-          nova_linha = tabela.insertRow();
-          titulo = nova_linha.insertCell();
-          detalhes = nova_linha.insertCell();
-
-          titulo.innerHTML = nome_objeto;
-          detalhes.innerHTML = "<a href='update/disciplina/" + String(id) + "'/>Detalhes</a>";
-        }
-      };
-        requisicao.open("POST", '/api/disciplinas/', true);
-        requisicao.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        nome = document.getElementById("id_nome").value;
-        codigo = document.getElementById("id_codigo").value;
-        carga_horaria_total = document.getElementById("id_carga_horaria_total").value;
-        requisicao.send("csrfmiddlewaretoken=" + "{{ csrf_token }}" + "&nome=" + nome + "&codigo=" + codigo + "&carga_horaria_total=" + carga_horaria_total);
-      };
-
       $(".rows").click
       (
         function(e)
