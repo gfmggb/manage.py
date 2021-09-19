@@ -6,15 +6,6 @@ from django.db import models
 
 class SalaDeAula(models.Model):
     nome = models.CharField(max_length = 40)
-    tipos = (
-        ("Sala regular", "Sala regular"),
-        ("Laboratório", "Laboratório"),
-        ("Audiovisual", "Audiovisual"),
-        ("Auditório", "Auditório"),
-        ("Miniauditório", "Miniauditório"),
-    )
-    tipo = models.CharField(max_length = 15, choices = tipos)
-    numero = models.IntegerField()
     def __str__(self):
         return "Sala de aula #%d: %s" % (int(self.id), self.nome)
 
@@ -25,7 +16,6 @@ class SalaDeAula(models.Model):
 
 class Disciplina(models.Model):
     nome = models.CharField(max_length = 25)
-    codigo = models.CharField(max_length = 25)
     carga_horaria_total = models.IntegerField()
     def __str__(self):
         return "Disciplina #%d: %s" % (int(self.id), self.nome)
@@ -37,9 +27,7 @@ class Disciplina(models.Model):
 
 class Professor(models.Model):
     nome = models.CharField(max_length = 45)
-    telefone = models.CharField(max_length = 15)
-    email = models.CharField(max_length = 90)
-    matricula = models.CharField(max_length = 15)
+    cpf = models.CharField(max_length = 15)
     def __str__(self):
         return "Professor #%d: %s" % (int(self.id), self.nome)
 
@@ -49,11 +37,6 @@ class Professor(models.Model):
 ###############################--Turma--###############################
 
 class Turma(models.Model):
-    opcoes = (
-        ("Matutino", "Matutino"),
-        ("Vespertino", "Vespertino"),
-    )
-    turno = models.CharField(max_length = 15, choices = opcoes)
     nome = models.CharField(max_length = 50)
     def __str__(self):
         return "Turma #%d: %s" % (int(self.id), self.nome)

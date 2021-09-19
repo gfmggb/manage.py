@@ -7,18 +7,18 @@ from .models import Turma
 class FormProfessor(forms.ModelForm):
     class Meta:
         model = Professor
-        fields = ['nome', 'telefone', 'email', 'matricula']
+        fields = ['nome', 'cpf']
 class FormTurma(forms.ModelForm):
     class Meta:
         model = Turma
-        fields = ['nome', 'turno']
+        fields = ['nome']
 
 class FormDisciplina(forms.ModelForm):
     class Meta:
         model = Disciplina
-        fields = ['nome', 'codigo', 'carga_horaria_total']
+        fields = ['nome', 'carga_horaria_total']
 
 class FormSala(forms.ModelForm):
     class Meta:
         model = SalaDeAula
-        fields = ['nome', 'tipo', 'numero']
+        fields = ['nome']

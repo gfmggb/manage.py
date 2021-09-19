@@ -16,7 +16,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nome', models.CharField(max_length=25)),
-                ('codigo', models.CharField(max_length=25)),
                 ('carga_horaria_total', models.IntegerField()),
             ],
             options={

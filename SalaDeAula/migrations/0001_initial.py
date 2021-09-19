@@ -16,8 +16,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nome', models.CharField(max_length=40)),
-                ('tipo', models.CharField(choices=[('Sala regular', 'Sala regular'), ('Laboratório', 'Laboratório'), ('Audiovisual', 'Audiovisual'), ('Auditório', 'Auditório'), ('Miniauditório', 'Miniauditório')], max_length=15)),
-                ('numero', models.IntegerField()),
             ],
             options={
                 'verbose_name_plural': 'Salas de aula',
